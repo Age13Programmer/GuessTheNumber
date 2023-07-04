@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="./images/favicon guess the number.jpg" />
+  <title>Guess the Number</title>
+  <style>
+    body {
+      text-align: center;
+      padding-top: 100px;
+      font-family: Arial, sans-serif;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    input[type="submit"], input[type="button"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #be9ff7;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <img width="250" src="./images/Guess the number.jpg"/>
+  <h1>Guess the Number</h1>
+  <p>Indovina un numero tra 1 e 100:</p>
+  <input type="text" id="guess" placeholder="Enter your guess" />
+  <input type="submit" value="Submit" onclick="checkGuess()" />
+  <p id="message"></p>
+  <input type="button" value="New Game" onclick="newGame()" />
+
+  <script>
+    let randomNumber;
+    let attemptsLeft = 3;
+
+    function newGame() {
+      // Ricarica la pagina per iniziare una nuova partita
+      location.reload();
+    }
+
+    function initialize() {
+      // Genera un numero casuale tra 1 e 100 all'inizio del gioco
+      randomNumber = Math.floor(Math.random() * 100) + 1;
+    }
+
+    function checkGuess() {
+      // Ottieni il valore inserito dall'utente
+      const userGuess = parseInt(document.getElementById('guess').value);
+
+      // Controlla se il valore inserito è corretto
+      if (userGuess === randomNumber) {
+        showMessage('Congratulazioni! Hai indovinato il numero!');
+        disableInputAndButton();
+      } else if (userGuess < randomNumber) {
+        showMessage('Il numero è troppo basso. Prova di nuovo!');
+      } else if (userGuess > randomNumber) {
+        showMessage('Il numero è troppo alto. Prova di nuovo!');
+      }
+
+      // Riduci il numero di tentativi rimanenti
+      attemptsLeft--;
+
+      // Se i tentativi sono esauriti, mostra il numero scelto
+      if (attemptsLeft === 0) {
+        showMessage('Hai perso! Il numero era ' + randomNumber + '.');
+        disableInputAndButton();
+      }
+    }
+
+    function showMessage(message) {
+      // Mostra il messaggio nella pagina
+      document.getElementById('message').textContent = message;
+    }
+
+    function disableInputAndButton() {
+      // Disabilita l'input e il pulsante dopo che il numero è stato indovinato o i tentativi sono esauriti
+      document.getElementById('guess').disabled = true;
+      document.getElementsByTagName('input')[1].disabled = true;
+    }
+
+    // Inizializza il gioco all'avvio della pagina
+    initialize();
+  </script>
+  <br />
+  <br />
+    <p align="center">
+  <bold>&copy;2023 Nicola Martino</bold>
+  <br />
+  <bold>Powered by GitHub</bold>
+    </p>
+</body>
+</html>
