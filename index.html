@@ -29,23 +29,17 @@
   <img width="250" src="./images/Guess the number.jpg"/>
   <h1>Guess the Number</h1>
   <p>Indovina un numero tra 1 e 100:</p>
-  <input type="text" id="guess" placeholder="Enter your guess" />
-  <input type="submit" value="Submit" onclick="checkGuess()" />
+  <input type="text" id="guess" placeholder="Inserisci il tuo tentativo" />
+  <input type="submit" value="Invia" onclick="checkGuess()" />
   <p id="message"></p>
-  <input type="button" value="New Game" onclick="newGame()" />
+  <input type="button" value="Nuova Partita" onclick="newGame()" />
 
   <script>
-    let randomNumber;
     let attemptsLeft = 3;
 
     function newGame() {
       // Ricarica la pagina per iniziare una nuova partita
       location.reload();
-    }
-
-    function initialize() {
-      // Genera un numero casuale tra 1 e 100 all'inizio del gioco
-      randomNumber = Math.floor(Math.random() * 100) + 1;
     }
 
     function checkGuess() {
@@ -57,9 +51,9 @@
         showMessage('Congratulazioni! Hai indovinato il numero!');
         disableInputAndButton();
       } else if (userGuess < randomNumber) {
-        showMessage('Il numero è troppo basso. Prova di nuovo!');
+        showMessage('Il numero è troppo basso. Prova ancora!');
       } else if (userGuess > randomNumber) {
-        showMessage('Il numero è troppo alto. Prova di nuovo!');
+        showMessage('Il numero è troppo alto. Prova ancora!');
       }
 
       // Riduci il numero di tentativi rimanenti
@@ -72,9 +66,9 @@
       }
     }
 
-    function showMessage(message) {
+    function showMessage(messaggio) {
       // Mostra il messaggio nella pagina
-      document.getElementById('message').textContent = message;
+      document.getElementById('message').textContent = messaggio;
     }
 
     function disableInputAndButton() {
@@ -83,8 +77,8 @@
       document.getElementsByTagName('input')[1].disabled = true;
     }
 
-    // Inizializza il gioco all'avvio della pagina
-    initialize();
+    // Genera un numero casuale tra 1 e 100 all'inizio del gioco
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
   </script>
   <br />
   <br />
